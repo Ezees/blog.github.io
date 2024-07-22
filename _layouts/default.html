@@ -16,7 +16,7 @@ layout: compress
 <html lang="{{ page.lang | default: site.alt_lang | default: site.lang }}" {{ prefer_mode }}>
   {% include head.html %}
 
-  <body>
+  <body id="page-top" class="index">
     {% include sidebar.html lang=lang %}
 
     <div id="main-wrapper" class="d-flex justify-content-center">
@@ -45,6 +45,10 @@ layout: compress
             {% endfor %}
           </aside>
         </div>
+         {% include nav.html %}
+  {% include header.html %}
+  {% include portfolio_grid.html %}
+  {% include about.html %}
 
         <div class="row">
           <!-- tail -->
@@ -60,6 +64,10 @@ layout: compress
 
         {% include_cached search-results.html lang=lang %}
       </div>
+       {% if site.contact == "static" %}
+  {% include contact_static.html %}
+  {% elsif site.contact == "disqus" %}
+  {% include contact_disqus.html %}
 
       <aside aria-label="Scroll to Top">
         <button id="back-to-top" type="button" class="btn btn-lg btn-box-shadow">
@@ -69,13 +77,17 @@ layout: compress
     </div>
 
     <div id="mask"></div>
+    {% include footer.html %}
+  {% include modals.html %}
 
     {% if site.pwa.enabled %}
       {% include_cached notification.html lang=lang %}
     {% endif %}
+ 
 
     <!-- JavaScripts -->
     {% include js-selector.html lang=lang %}
+      {% include js.html %}
 
     {% include_cached search-loader.html lang=lang %}
   </body>
